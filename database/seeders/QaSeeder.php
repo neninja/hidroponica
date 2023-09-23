@@ -19,5 +19,7 @@ class QaSeeder extends Seeder
             'email' => 'admin@hidroponi.ca',
             'password' => '123',
         ]);
+
+        User::factory(10)->create();
     }
 }

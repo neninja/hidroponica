@@ -1,8 +1,10 @@
 <?php
 
-use function Pest\Laravel\{get, post};
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 it('creates a token', function () {
     $password = fake()->password();

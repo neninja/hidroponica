@@ -16,7 +16,7 @@ class IssueTokenController extends Controller
      */
     public function __invoke(IssueTokenRequest $request): JsonResponse
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (! Auth::attempt($request->only('email', 'password'))) {
             throw new InvalidCredentialException();
         }
 

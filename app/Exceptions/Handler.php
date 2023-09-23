@@ -3,11 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use App\Exceptions\AppException;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -38,15 +36,15 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (NotFoundHttpException $exception) {
-            return $this->jsonResponse("errors.not_found", 404);
+            return $this->jsonResponse('errors.not_found', 404);
         });
 
         $this->renderable(function (HttpExceptionInterface $e) {
-            return $this->jsonResponse("errors.generic", $e->getStatusCode());
+            return $this->jsonResponse('errors.generic', $e->getStatusCode());
         });
 
         $this->renderable(function (Throwable $exception) {
-            $errorCode = "errors.generic";
+            $errorCode = 'errors.generic';
 
             $data = [];
 
@@ -65,7 +63,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    private function jsonResponse(string $errorCode, int $httpStatusCode, array $data = [], ?string $message = null): JsonResponse
+    private function jsonResponse(string $errorCode, int $httpStatusCode, array $data = [], string $message = null): JsonResponse
     {
         $response = [
             'code' => $errorCode,

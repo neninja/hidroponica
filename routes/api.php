@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\IssueTokenController;
 use App\Http\Controllers\MeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +23,6 @@ Route::middleware(['throttle:login'])->group(function () {
     Route::post('/tokens', IssueTokenController::class)->name('login');
 });
 
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', MeController::class);
 });

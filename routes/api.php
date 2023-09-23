@@ -19,9 +19,7 @@ Route::get('/', function () {
     return response()->json(['quote' => 'memento mori 💀']);
 });
 
-Route::middleware(['throttle:login'])->group(function () {
-    Route::post('/tokens', IssueTokenController::class)->name('login');
-});
+Route::post('/tokens', IssueTokenController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', MeController::class);

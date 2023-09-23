@@ -16,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/me', MeController::class);
+Route::get('/', function () {
+    return response()->json(['quote' => 'memento mori 💀']);
+});
 
 Route::middleware(['throttle:login'])->group(function () {
     Route::post('/tokens', IssueTokenController::class)->name('login');
+});
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/me', MeController::class);
 });

@@ -1,4 +1,5 @@
 /.phpunit.cache
+vapor.yml
 meumakefile
 /node_modules
 /public/build

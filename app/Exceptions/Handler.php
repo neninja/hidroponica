@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
@@ -43,7 +44,17 @@ class Handler extends ExceptionHandler
             return $this->jsonResponse('errors.generic', $e->getStatusCode());
         });
 
+        $this->renderable(function (AuthenticationException $e) {
+            return redirect()->guest('admin/login');
+        });
+
         $this->renderable(function (Throwable $exception) {
+            $isApiRequests = in_array('api', request()?->route()?->middleware() ?? []);
+
+            if (! $isApiRequests) {
+                return $this->prepareResponse(request(), $exception);
+            }
+
             $errorCode = 'errors.generic';
 
             $data = [];

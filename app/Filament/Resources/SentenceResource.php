@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SentenceResource\Pages;
 use App\Models\Sentence;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,9 +26,23 @@ class SentenceResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('content'),
-                TextInput::make('start_at')->numeric(),
-                TextInput::make('end_at')->numeric(),
+                Grid::make('grid')
+                    ->columns(1)
+                    ->schema([
+                        TextInput::make('content')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
+                Grid::make('grid')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('start_at')
+                            ->required()
+                            ->numeric(),
+                        TextInput::make('end_at')
+                            ->required()
+                            ->numeric(),
+                    ]),
             ]);
     }
 

@@ -2,11 +2,12 @@
 
 namespace App\Filament\Resources\TextResource\RelationManagers;
 
-use App\Filament\Helpers\EditActionGoToResource;
-use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 
 class SentencesRelationManager extends RelationManager
@@ -17,9 +18,23 @@ class SentencesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('sentences')
-                    ->required()
-                    ->maxLength(255),
+                Grid::make('grid')
+                    ->columns(1)
+                    ->schema([
+                        TextInput::make('content')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
+                Grid::make('grid')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('start_at')
+                            ->required()
+                            ->numeric(),
+                        TextInput::make('end_at')
+                            ->required()
+                            ->numeric(),
+                    ]),
             ]);
     }
 
@@ -37,7 +52,7 @@ class SentencesRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                EditActionGoToResource::make(),
+                EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

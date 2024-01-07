@@ -59,6 +59,7 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 Outros comandos úteis durante o desenvolvimento:
 
 - `sail bash`
+- `sail psql`
 - `sail tinker`
 - `sail artisan queue:work`
 - `sail composer ide`

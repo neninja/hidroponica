@@ -6,6 +6,7 @@ use App\Filament\Resources\TextResource\Pages;
 use App\Filament\Resources\TextResource\RelationManagers\SentencesRelationManager;
 use App\Models\Text;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -30,6 +31,7 @@ class TextResource extends Resource
             ->schema([
                 TextInput::make('name')->label('Título'),
                 Checkbox::make('is_active')->label('Ativo'),
+                FileUpload::make('file')->label('Arquivo'),
             ]);
     }
 

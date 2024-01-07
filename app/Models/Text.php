@@ -13,7 +13,9 @@ class Text extends Model
     use HasFactory;
 
     protected $fillable = [
-        'text',
+        'name',
+        'file',
+        'language',
         'is_active',
     ];
 

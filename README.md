@@ -1,5 +1,13 @@
 # Hidroponica
 
+Sistema de gerenciamento e API com textos traduzidos para estudar com *listening*
+
+![Listagem de textos](screenshots/admin-text-list.png)
+
+![Visualização do texto](screenshots/admin-text-view.png)
+
+![Edição de sentença](screenshots/admin-sentence-edit.png)
+
 ## Desenvolvimento
 
 ### Ambiente

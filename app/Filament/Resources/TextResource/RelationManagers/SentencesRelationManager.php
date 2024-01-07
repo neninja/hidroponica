@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\TextResource\RelationManagers;
 
+use App\Enums\LanguageType;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -14,26 +17,39 @@ class SentencesRelationManager extends RelationManager
 {
     protected static string $relationship = 'sentences';
 
+    protected static string $view = 'filament.layouts.text.sentences-relation';
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Grid::make('grid')
+                Grid::make()
                     ->columns(1)
                     ->schema([
                         TextInput::make('content')
                             ->required()
                             ->maxLength(255),
-                    ]),
-                Grid::make('grid')
-                    ->columns(2)
-                    ->schema([
-                        TextInput::make('start_at')
-                            ->required()
-                            ->numeric(),
-                        TextInput::make('end_at')
-                            ->required()
-                            ->numeric(),
+                        Repeater::make('translatedSentences')
+                            ->label('Traduções')
+                            ->relationship()
+                            ->schema([
+                                Select::make('language')
+                                    ->required()
+                                    ->options(LanguageType::filamentOptions()),
+                                TextInput::make('content')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]),
+                        Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                TextInput::make('start_at')
+                                    ->required()
+                                    ->numeric(),
+                                TextInput::make('end_at')
+                                    ->required()
+                                    ->numeric(),
+                            ]),
                     ]),
             ]);
     }

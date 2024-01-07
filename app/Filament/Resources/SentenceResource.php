@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 
 class SentenceResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = Sentence::class;
 
     protected static ?string $label = 'Sentença';

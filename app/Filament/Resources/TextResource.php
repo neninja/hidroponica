@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -27,8 +28,8 @@ class TextResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name'),
-                Checkbox::make('is_active'),
+                TextInput::make('name')->label('Título'),
+                Checkbox::make('is_active')->label('Ativo'),
             ]);
     }
 
@@ -37,11 +38,8 @@ class TextResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->label('Nome'),
-                TextColumn::make('language'),
-                // TextColumn::make('language')->state(function ($value) {
-                // return $value->getLabel();
-                // }),
-                // ->label('Idioma')
+                TextColumn::make('language')->label('Idioma'),
+                CheckboxColumn::make('is_active')->label('Ativo'),
             ])
             ->filters([
                 //

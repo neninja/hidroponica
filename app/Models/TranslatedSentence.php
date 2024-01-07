@@ -11,6 +11,11 @@ class TranslatedSentence extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'content',
+        'language',
+    ];
+
     protected $casts = [
         'language' => LanguageType::class,
     ];

@@ -21,7 +21,7 @@ class AesopSeeder extends Seeder
                 20,
                 30,
                 'A hungry Fox saw some fine bunches of Grapes hanging from a vine that was trained along a high trellis,',
-                'Um faminto Raposo viu alguns cachos de uvas pendurados em uma videira que estava treinada ao longo de uma treliça alta,',
+                'Um raposo faminto viu alguns belos cachos de uvas pendurados em uma videira que estava apoiada ao longo de uma treliça alta,',
             ],
             [
                 30,
@@ -99,6 +99,7 @@ class AesopSeeder extends Seeder
             })
             ->create([
                 'name' => $title,
+                'is_active' => true,
                 'language' => LanguageType::English,
             ]);
 

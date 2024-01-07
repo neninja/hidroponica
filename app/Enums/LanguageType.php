@@ -16,4 +16,12 @@ enum LanguageType: string implements HasLabel
             self::BrazilianPortuguese => 'Português',
         };
     }
+
+    public static function filamentOptions(): array
+    {
+        return [
+            self::English->value => 'Inglês',
+            self::BrazilianPortuguese->value => 'Português',
+        ];
+    }
 }

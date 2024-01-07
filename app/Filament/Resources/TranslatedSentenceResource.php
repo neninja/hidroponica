@@ -11,6 +11,8 @@ use Filament\Tables\Table;
 
 class TranslatedSentenceResource extends Resource
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $model = TranslatedSentence::class;
 
     protected static ?string $label = 'Sentença traduzida';

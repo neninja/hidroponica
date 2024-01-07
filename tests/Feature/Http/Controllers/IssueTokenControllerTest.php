@@ -3,7 +3,6 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 
 it('creates a token', function () {
@@ -18,7 +17,6 @@ it('creates a token', function () {
     ];
 
     post('/api/tokens', $data)
-        ->dump()
         ->assertStatus(200)
         ->assertJsonStructure([
             'access_token',
@@ -27,6 +25,4 @@ it('creates a token', function () {
         ]);
 
     expect(Auth::user()->id)->toBe($user->id);
-
-    get('/api/me')->dump();
 });

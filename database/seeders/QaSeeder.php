@@ -25,8 +25,18 @@ class QaSeeder extends Seeder
 
     public function createUsers(): void
     {
-        User::factory()->create([
+        User::factory()->admin()->create([
             'email' => 'admin@hidroponi.ca',
+            'password' => '123',
+        ]);
+
+        User::factory()->operator()->create([
+            'email' => 'operator@hidroponi.ca',
+            'password' => '123',
+        ]);
+
+        User::factory()->consumer()->create([
+            'email' => 'consumer@hidroponi.ca',
             'password' => '123',
         ]);
 

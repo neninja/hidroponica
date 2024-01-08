@@ -3,7 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(
+    schema: 'IssueTokenRequest',
+    type: 'object',
+    properties: [
+        new OA\Property(property: 'email', type: 'string'),
+        new OA\Property(property: 'password', type: 'string'),
+    ]
+)]
 class IssueTokenRequest extends FormRequest
 {
     /**

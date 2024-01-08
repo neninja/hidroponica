@@ -31,7 +31,13 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 ./vendor/bin/sail artisan key:generate
 ```
 
-4. Crie as tabelas com alguns registros
+4. Crie a documentação de referência em `localhost/api/reference`
+```sh
+./vendor/bin/sail artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+./vendor/bin/sail artisan l5-swagger:generate
+```
+
+5. Crie as tabelas com alguns registros
 
 ```sh
 ./vendor/bin/sail artisan migrate:fresh --seed
@@ -62,14 +68,13 @@ Outros comandos úteis durante o desenvolvimento:
 - `sail psql`
 - `sail tinker`
 - `sail artisan queue:work`
-- `sail composer ide`
 - `sail artisan optimize:clear`
 - `sail composer i`
 
 ### Linting
 
 ```sh
-./vendor/bin/sail pint
+./vendor/bin/sail php ./vendor/bin/pint
 ./vendor/bin/sail php ./vendor/bin/pint --dirty
 ```
 

@@ -14,6 +14,9 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, FilamentUser
 {
     use Authenticatable, Authorizable;

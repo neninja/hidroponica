@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\GetTextController;
 use App\Http\Controllers\IssueTokenController;
+use App\Http\Controllers\ListTextsController;
 use App\Http\Controllers\MeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +25,9 @@ Route::post('/tokens', IssueTokenController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', MeController::class);
+
+    Route::prefix('texts')->group(function () {
+        Route::get('/', ListTextsController::class);
+        Route::get('/{text}', GetTextController::class);
+    });
 });

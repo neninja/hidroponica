@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('texts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('audio')->nullable();
             $table->boolean('is_active')->default(true);
@@ -21,8 +21,8 @@ return new class extends Migration
         });
 
         Schema::create('sentences', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('text_id')->constrained()->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('text_id')->constrained()->cascadeOnDelete();
             $table->float('start_at');
             $table->float('end_at');
             $table->text('content');
@@ -31,8 +31,8 @@ return new class extends Migration
         });
 
         Schema::create('translated_sentences', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('sentence_id')->constrained()->cascadeOnDelete();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('sentence_id')->constrained()->cascadeOnDelete();
             $table->string('language');
             $table->text('content');
             $table->timestamps();

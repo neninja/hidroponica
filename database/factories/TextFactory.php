@@ -18,6 +18,7 @@ class TextFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => fake()->unique()->uuid(),
             'name' => fake()->unique()->words(5, true),
             'is_active' => fake()->boolean(),
             'language' => fake()->randomElement(LanguageType::cases()),

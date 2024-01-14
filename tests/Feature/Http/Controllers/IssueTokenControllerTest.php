@@ -17,12 +17,29 @@ it('creates a token', function () {
     ];
 
     post('/api/tokens', $data)
-        ->assertStatus(200)
+        ->assertSuccessful()
         ->assertJsonStructure([
             'access_token',
             'device',
             'user',
         ]);
+
+    expect(Auth::user()->id)->toBe($user->id);
+});
+
+it('creates a token and only return its', function () {
+    $user = User::factory()->create(['password' => '123']);
+
+    $data = [
+        'email' => $user->email,
+        'password' => '123',
+    ];
+
+    $resp = post('/api/tokens?token_only=true', $data)
+        ->assertSuccessful()
+        ->getContent();
+
+    expect($resp)->not->toMatch('/{/');
 
     expect(Auth::user()->id)->toBe($user->id);
 });

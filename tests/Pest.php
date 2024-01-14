@@ -11,9 +11,12 @@
 |
 */
 
+use App\Models\User;
+use Tests\TestCase;
+
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+    Illuminate\Foundation\Testing\RefreshDatabase::class,
 )->in('Feature');
 
 /*
@@ -45,4 +48,11 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function asRandomUser(): TestCase
+{
+    $user = User::factory()->create();
+
+    return test()->actingAs($user);
 }

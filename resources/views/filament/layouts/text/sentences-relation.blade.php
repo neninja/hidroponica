@@ -21,9 +21,9 @@ $sentences = $this->getRelationship()->get();
                         <span
                             class="cursor-pointer"
                             wire:loading.attr="disabled"
-                            :class="{ 'bg-red-200': id == {{$sentence->id}}}"
+                            :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
                             wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                            @mouseenter="id = {{$sentence->id}}"
+                            @mouseenter="id = '{{$sentence->id}}'"
                         >
                             {{$sentence->content}}
                         </span>
@@ -32,9 +32,9 @@ $sentences = $this->getRelationship()->get();
                         <span
                             class="cursor-pointer"
                             wire:loading.attr="disabled"
-                            :class="{ 'bg-red-200': id == {{$sentence->id}}}"
+                            :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
                             wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                            @mouseenter="id = {{$sentence->id}}"
+                            @mouseenter="id = '{{$sentence->id}}'"
                         >
                             {{$sentence->content}}
                         </span>
@@ -42,35 +42,35 @@ $sentences = $this->getRelationship()->get();
                 </p>
             </x-filament::section>
             <!-- create section por languagen for tanslate-->
-            @foreach ($this->ownerRecord->sentencasTraduzidasAgrupadas() as $language => $sentence)
+            @foreach ($this->ownerRecord->translatedSentencesGroupByLanguage() as $language => $translatedSentences)
                 <x-filament::section>
                     <x-slot name="heading">
                         {{\App\Enums\LanguageType::tryFrom($language)->getLabel()}}
                     </x-slot>
                     <p>
-                    @foreach ($sentence as $sentence)
-                        @if($sentence->new_paragraph)
+                    @foreach ($translatedSentences as $translatedSentence)
+                        @if($translatedSentence->sentence->new_paragraph)
                         </p>
                         <p>
                             <span
                                 class="cursor-pointer"
                                 wire:loading.attr="disabled"
-                                :class="{ 'bg-red-200': id == {{$sentence->id}}}"
-                                wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                                @mouseenter="id = {{$sentence->id}}"
+                                :class="{ 'bg-red-200': id == '{{$translatedSentence->sentence->id}}'}"
+                                wire:click="mountTableAction('edit', '{{$translatedSentence->sentence->id}}')"
+                                @mouseenter="id = '{{$translatedSentence->sentence->id}}'"
                             >
-                                {{$sentence->content}}
+                                {{$translatedSentence->content}}
                             </span>
                         @else
                         @endif
                             <span
                                 class="cursor-pointer"
                                 wire:loading.attr="disabled"
-                                :class="{ 'bg-red-200': id == {{$sentence->id}}}"
-                                wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                                @mouseenter="id = {{$sentence->id}}"
+                                :class="{ 'bg-red-200': id == '{{$translatedSentence->sentence->id}}'}"
+                                wire:click="mountTableAction('edit', '{{$translatedSentence->sentence->id}}')"
+                                @mouseenter="id = '{{$translatedSentence->sentence->id}}'"
                             >
-                                {{$sentence->content}}
+                                {{$translatedSentence->content}}
                             </span>
                     @endforeach
                     </p>

@@ -45,4 +45,6 @@ use OpenApi\Attributes as OA;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public const DEFAULT_PAGINATION_LIMIT = 50;
 }

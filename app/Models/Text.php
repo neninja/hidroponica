@@ -35,7 +35,7 @@ class Text extends BaseModel
         return $this->hasManyThrough(TranslatedSentence::class, Sentence::class)->orderBy('start_at', 'asc');
     }
 
-    public function sentencasTraduzidasAgrupadas()
+    public function translatedSentencesGroupByLanguage()
     {
         return $this->translatedSentences()->get()->groupBy('language');
     }

@@ -6,13 +6,21 @@ use App\Exceptions\InvalidCredentialException;
 use App\Http\Requests\IssueTokenRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OA;
+use Symfony\Component\HttpFoundation\Response;
 
 class IssueTokenController extends Controller
 {
     #[OA\Post(path: '/api/tokens', tags: ['auth'])]
+    #[OA\Parameter(
+        description: 'Retornar somente o token como texto puro',
+        in: 'query',
+        name: 'token_only',
+        required: false,
+        example: true,
+        schema: new OA\Schema(type: 'boolean'),
+    )]
     #[OA\RequestBody(
         content: new OA\MediaType(
             mediaType: 'application/json',
@@ -29,7 +37,7 @@ class IssueTokenController extends Controller
             ]
         )
     )]
-    public function __invoke(IssueTokenRequest $request): JsonResponse
+    public function __invoke(IssueTokenRequest $request): Response
     {
         if (! Auth::attempt($request->only('email', 'password'))) {
             throw new InvalidCredentialException();
@@ -39,6 +47,10 @@ class IssueTokenController extends Controller
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken($request->input('device') ?? $request->userAgent());
+
+        if ($request->input('token_only')) {
+            return response($token->plainTextToken, 200);
+        }
 
         return response()->json([
             'access_token' => $token->plainTextToken,

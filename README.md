@@ -102,3 +102,7 @@ Outros comandos úteis durante o desenvolvimento:
 ./vendor/bin/sail test --parallel --no-coverage
 ./vendor/bin/sail test --filter nomeDoTeste
 ```
+
+## QA
+
+É mantido em paralelo os [testes automatizados](http://github.com/nenitf/hidroponiqa) de api e interface web

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         if (! app()->environment('production')) {
             $this->call(QaSeeder::class);
+            $this->call(DevSeeder::class);
         }
     }
 }

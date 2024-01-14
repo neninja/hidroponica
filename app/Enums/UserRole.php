@@ -8,14 +8,14 @@ enum UserRole: string implements HasLabel
 {
     case Admin = 'admin';
     case Operator = 'operator';
-    case Consumer = 'consumer';
+    case Student = 'student';
 
     public function getLabel(): ?string
     {
         return match ($this) {
             self::Admin => 'Administrador',
             self::Operator => 'Operador',
-            self::Consumer => 'Consumidor',
+            self::Student => 'Estudante',
         };
     }
 
@@ -28,7 +28,7 @@ enum UserRole: string implements HasLabel
             self::Operator => [
                 UserPermission::AccessBackoffice,
             ],
-            self::Consumer => [],
+            self::Student => [],
         };
     }
 }

@@ -20,33 +20,30 @@ class QaSeeder extends Seeder
     public function run(): void
     {
         $this->createUsers();
-        $this->call(AesopSeeder::class);
+        $this->createTexts();
     }
 
     public function createUsers(): void
     {
         User::factory()->admin()->create([
-            'email' => 'admin@hidroponi.ca',
+            'email' => 'qa_admin@hidroponi.ca',
             'password' => '123',
         ]);
 
         User::factory()->operator()->create([
-            'email' => 'operator@hidroponi.ca',
+            'email' => 'qa_operator@hidroponi.ca',
             'password' => '123',
         ]);
 
-        User::factory()->consumer()->create([
-            'email' => 'consumer@hidroponi.ca',
+        User::factory()->student()->create([
+            'email' => 'qa_student@hidroponi.ca',
             'password' => '123',
         ]);
-
-        User::factory(10)->create();
     }
 
     public function createTexts(): void
     {
         Text::factory()
-            ->count(10)
             ->afterCreating(function (Text $text) {
                 Sentence::factory()
                     ->count(5)
@@ -61,6 +58,9 @@ class QaSeeder extends Seeder
                     })
                     ->create(['text_id' => $text->id]);
             })
-            ->create();
+            ->create([
+                'id' => '1a5c4380-d96f-33f0-886a-4e4f77632ac0',
+                'name' => 'QA Test n1'
+            ]);
     }
 }

@@ -31,7 +31,7 @@ class TextResource extends Resource
             ->schema([
                 TextInput::make('name')->label('Título'),
                 Checkbox::make('is_active')->label('Ativo'),
-                FileUpload::make('file')->label('Arquivo'),
+                FileUpload::make('audio')->label('Arquivo'),
             ]);
     }
 

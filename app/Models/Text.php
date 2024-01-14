@@ -4,20 +4,19 @@ namespace App\Models;
 
 use App\Enums\LanguageType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @mixin IdeHelperText
  */
-class Text extends Model
+class Text extends BaseModel
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'file',
+        'audio',
         'language',
         'is_active',
     ];

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('texts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('file')->nullable();
+            $table->string('audio')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('language');
             $table->timestamps();

@@ -2,7 +2,7 @@
 
 use App\Models\Text;
 
-use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 
 it('shows a text', function () {
     $texts = Text::factory()->count(5)->create();
@@ -10,7 +10,7 @@ it('shows a text', function () {
 
     asRandomUser();
 
-    get("/api/texts/{$text->id}")
+    getJson("/api/texts/{$text->id}")
         ->assertSuccessful()
         ->assertJsonPath('data.id', $text->id)
         ->assertJsonStructure([

@@ -2,13 +2,13 @@
 
 use App\Models\Text;
 
-use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 
 it('lists all texts', function () {
     Text::factory()->count(5)->create();
     asRandomUser();
 
-    get('/api/texts')
+    getJson('/api/texts')
         ->assertSuccessful()
         ->assertJsonCount(5, 'data')
         ->assertJsonPath('meta.total', 5)

@@ -6,6 +6,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -48,7 +49,11 @@ class Handler extends ExceptionHandler
             return redirect()->guest('admin/login');
         });
 
-        $this->renderable(function (Throwable $exception) {
+        $this->renderable(function (Throwable $exception, $request) {
+            if ($exception instanceof ValidationException) {
+                return $this->convertValidationExceptionToResponse($exception, $request);
+            }
+
             $isApiRequests = in_array('api', request()?->route()?->middleware() ?? []);
 
             if (! $isApiRequests) {

@@ -3,7 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-use function Pest\Laravel\post;
+use function Pest\Laravel\postJson;
 
 it('creates a token', function () {
     $password = fake()->password();
@@ -16,7 +16,7 @@ it('creates a token', function () {
         'password' => $password,
     ];
 
-    post('/api/tokens', $data)
+    postJson('/api/tokens', $data)
         ->assertSuccessful()
         ->assertJsonStructure([
             'access_token',
@@ -35,11 +35,24 @@ it('creates a token and only return its', function () {
         'password' => '123',
     ];
 
-    $resp = post('/api/tokens?token_only=true', $data)
+    $resp = postJson('/api/tokens?token_only=true', $data)
         ->assertSuccessful()
         ->getContent();
 
     expect($resp)->not->toMatch('/{/');
 
     expect(Auth::user()->id)->toBe($user->id);
+});
+
+it('requires email field', function () {
+    postJson('/api/tokens', ['password' => '123'])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(
+            [
+                'email' => __('validation.required', ['attribute' => __('validation.attributes.email')]),
+            ],
+            'errors'
+        );
+
+    expect(Auth::user())->toBeNull();
 });

@@ -53,7 +53,7 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 ./vendor/bin/sail artisan l5-swagger:generate
 ```
 
-5. Crie as tabelas com alguns registros
+5. Crie as tabelas com alguns registros do *seeder*
 
 ```sh
 ./vendor/bin/sail artisan migrate:fresh --seed

@@ -9,6 +9,8 @@ enum UserRole: string implements HasLabel
     case Admin = 'admin';
     case Operator = 'operator';
     case Student = 'student';
+    case DemoOperator = 'demo-operator';
+    case DemoStudent = 'demo-student';
 
     public function getLabel(): ?string
     {
@@ -16,6 +18,8 @@ enum UserRole: string implements HasLabel
             self::Admin => 'Administrador',
             self::Operator => 'Operador',
             self::Student => 'Estudante',
+            self::DemoOperator => 'Operador em demonstração',
+            self::DemoStudent => 'Estudante em demonstração',
         };
     }
 
@@ -28,6 +32,10 @@ enum UserRole: string implements HasLabel
             self::Operator => [
                 UserPermission::AccessBackoffice,
             ],
+            self::DemoOperator => [
+                UserPermission::AccessBackoffice,
+            ],
+            self::DemoStudent => [],
             self::Student => [],
         };
     }

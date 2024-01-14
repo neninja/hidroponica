@@ -94,7 +94,16 @@ Outros comandos úteis durante o desenvolvimento:
 ./vendor/bin/sail php ./vendor/bin/pint --dirty
 ```
 
-### Teste
+### Testes
+
+#### Ambiente
+
+```sh
+./vendor/bin/sail psql
+create database hidroponica_testing;
+```
+
+#### Execução
 
 ```sh
 ./vendor/bin/sail test
@@ -103,6 +112,6 @@ Outros comandos úteis durante o desenvolvimento:
 ./vendor/bin/sail test --filter nomeDoTeste
 ```
 
-## QA
+#### QA
 
 É mantido em paralelo os [testes automatizados](http://github.com/nenitf/hidroponiqa) de api e interface web

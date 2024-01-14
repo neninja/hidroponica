@@ -4,11 +4,27 @@
 
 Sistema de gerenciamento e API com textos traduzidos para estudar com *listening*
 
+## Screenshots
+
+<details>
+
+
+<!-- 1100 x 790 -->
+
+### Backoffice
+
 ![Listagem de textos](screenshots/admin-text-list.png)
 
 ![Visualização do texto](screenshots/admin-text-view.png)
 
 ![Edição de sentença](screenshots/admin-sentence-edit.png)
+
+### Referência da API com OpenAPI/Swagger
+
+![Swagger](screenshots/swagger.png)
+
+
+</details>
 
 ## Desenvolvimento
 

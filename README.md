@@ -47,7 +47,7 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 ./vendor/bin/sail artisan key:generate
 ```
 
-4. Crie a documentação de referência em `localhost/api/reference`
+4. Crie a documentação de referência que ficará disponível em `localhost/api/reference`
 ```sh
 ./vendor/bin/sail artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 ./vendor/bin/sail artisan l5-swagger:generate

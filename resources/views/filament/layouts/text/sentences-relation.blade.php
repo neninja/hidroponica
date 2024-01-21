@@ -13,33 +13,42 @@ $sentences = $this->getRelationship()->get();
                 <x-slot name="heading">
                     Texto Original
                 </x-slot>
-                <p>
-                @foreach ($this->ownerRecord->sentences as $sentence)
-                    @if($sentence->new_paragraph)
-                    </p>
-                    <p>
-                        <span
-                            class="cursor-pointer"
-                            wire:loading.attr="disabled"
-                            :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
-                            wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                            @mouseenter="id = '{{$sentence->id}}'"
-                        >
-                            {{$sentence->content}}
-                        </span>
-                    @else
-                    @endif
-                        <span
-                            class="cursor-pointer"
-                            wire:loading.attr="disabled"
-                            :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
-                            wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                            @mouseenter="id = '{{$sentence->id}}'"
-                        >
-                            {{$sentence->content}}
-                        </span>
-                @endforeach
-                </p>
+                <div class="flex flex-col gap-4">
+                    <div>
+                        <p>
+                        @foreach ($this->ownerRecord->sentences as $sentence)
+                            @if($sentence->new_paragraph)
+                            </p>
+                            <p>
+                                <span
+                                    class="cursor-pointer"
+                                    wire:loading.attr="disabled"
+                                    :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
+                                    wire:click="mountTableAction('edit', '{{$sentence->id}}')"
+                                    @mouseenter="id = '{{$sentence->id}}'"
+                                >
+                                    {{$sentence->content}}
+                                </span>
+                            @else
+                            @endif
+                                <span
+                                    class="cursor-pointer"
+                                    wire:loading.attr="disabled"
+                                    :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
+                                    wire:click="mountTableAction('edit', '{{$sentence->id}}')"
+                                    @mouseenter="id = '{{$sentence->id}}'"
+                                >
+                                    {{$sentence->content}}
+                                </span>
+                        @endforeach
+                        </p>
+                    </div>
+                    <div>
+                        <x-filament::button wire:click="mountTableAction('create')" icon="heroicon-m-plus">
+                            Adicionar sentença
+                        </x-filament::button>
+                    </div>
+                </div>
             </x-filament::section>
             <!-- create section por languagen for tanslate-->
             @foreach ($this->ownerRecord->translatedSentencesGroupByLanguage() as $language => $translatedSentences)

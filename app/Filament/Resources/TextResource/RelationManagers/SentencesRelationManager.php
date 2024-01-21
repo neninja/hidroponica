@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\TextResource\RelationManagers;
 
 use App\Enums\LanguageType;
+use App\Models\Sentence;
+use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -10,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 
@@ -29,6 +33,22 @@ class SentencesRelationManager extends RelationManager
                         TextInput::make('content')
                             ->required()
                             ->maxLength(255),
+                        Actions::make([
+                            Action::make('deleteSentence')
+                                ->label('Deletar sentença')
+                                ->icon('heroicon-m-x-mark')
+                                ->color('danger')
+                                ->requiresConfirmation()
+                                ->action(function (Sentence $sentence) {
+                                    $sentence->forceDelete();
+
+                                    return true;
+                                })
+                                ->after(fn () => redirect()->route(
+                                    'filament.admin.resources.texts.edit',
+                                    ['record' => $this->ownerRecord->id],
+                                )),
+                        ]),
                         Repeater::make('translatedSentences')
                             ->label('Traduções')
                             ->relationship()
@@ -69,7 +89,7 @@ class SentencesRelationManager extends RelationManager
             ])
             ->actions([
                 EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

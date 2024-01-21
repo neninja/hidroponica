@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\LanguageType;
 use App\Filament\Resources\TextResource\Pages;
 use App\Filament\Resources\TextResource\RelationManagers\SentencesRelationManager;
 use App\Models\Text;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -29,8 +31,11 @@ class TextResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->label('Título'),
-                Checkbox::make('is_active')->label('Ativo'),
+                TextInput::make('name')->required()->label('Título'),
+                Checkbox::make('is_active')->default(true)->label('Ativo'),
+                Select::make('language')
+                    ->required()
+                    ->options(LanguageType::filamentOptions()),
                 FileUpload::make('audio')->label('Arquivo'),
             ]);
     }

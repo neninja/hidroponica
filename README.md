@@ -41,27 +41,37 @@ cp .env.example .env
 docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:latest sh -c "composer config --global && composer install --ignore-platform-reqs"
 ```
 
-3. Crie a `APP_KEY`
+3. Suba o ambiente
+```sh
+./vendor/bin/sail up -d
+```
 
+> Esse comando é <a href="#Execução">utilizado sempre que quiser subir o ambiente ja configurado</a> também
+
+4. Crie a `APP_KEY`
 ```sh
 ./vendor/bin/sail artisan key:generate
 ```
 
-4. Crie a documentação de referência que ficará disponível em `localhost/api/reference`
+5. Crie as tabelas com alguns registros do *seeder*
+```sh
+./vendor/bin/sail artisan migrate:fresh --seed
+```
+
+6. Baixe as dependências javascript
+```sh
+./vendor/bin/sail npm i
+```
+
+7. Crie a documentação de referência que ficará disponível em `localhost/api/reference`
 ```sh
 ./vendor/bin/sail artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 ./vendor/bin/sail artisan l5-swagger:generate
 ```
 
-5. Crie as tabelas com alguns registros do *seeder*
-
-```sh
-./vendor/bin/sail artisan migrate:fresh --seed
-```
-
 ### Execução
 
-1. Inicie o backend
+1. Inicie o backend se necessário
 ```sh
 ./vendor/bin/sail up -d
 ```

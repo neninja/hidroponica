@@ -5,20 +5,16 @@ import tailwindcss from "tailwindcss";
 export default defineConfig({
     plugins: [
         laravel({
-            input: [
-                'resources/sass/app.scss',
-                'resources/js/app.js',
-                'resources/sass/institutional.scss',
-                'resources/js/institutional.js',
-            ],
+            input: ['resources/sass/webapp/app.scss', 'resources/js/webapp/app.js'],
             refresh: true,
+            buildDirectory: "/webapp-assets",
         }),
     ],
     css: {
         postcss: {
             plugins: [
                 tailwindcss({
-                    config: "./tailwind.config.js",
+                    config: "./tailwind-webapp.config.js",
                 }),
             ],
         },

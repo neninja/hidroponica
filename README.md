@@ -63,7 +63,13 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 ./vendor/bin/sail npm i
 ```
 
-7. Crie a documentação de referência que ficará disponível em `localhost/api/reference`
+7. Gere o frontend institucional, administrativo e webapp
+```sh
+./vendor/bin/sail npm run build:backoffice
+./vendor/bin/sail npm run build:webapp
+```
+
+8. Crie a documentação de referência que ficará disponível em `localhost/api/reference`
 ```sh
 ./vendor/bin/sail artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 ./vendor/bin/sail artisan l5-swagger:generate
@@ -78,9 +84,10 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 
 > Interrompa com `./vendor/bin/sail down`
 
-2. Inicie o frontend
+2. Inicie o frontend do backoffice **ou** webapp
 ```sh
-./vendor/bin/sail npm start
+./vendor/bin/sail npm run dev:backoffice
+./vendor/bin/sail npm run dev:webapp
 ```
 
 > Interrompa com <kbd>ctrl</kbd><kbd>c</kbd>

@@ -5,6 +5,7 @@ meumakefile
 /public/build
 /public/hot
 /public/storage
+/public/webapp-assets/
 /storage/*.key
 /storage/openapi*
 /vendor

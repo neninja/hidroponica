@@ -16,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class TextResource extends Resource
 {
@@ -36,7 +37,15 @@ class TextResource extends Resource
                 Select::make('language')
                     ->required()
                     ->options(LanguageType::filamentOptions()),
-                FileUpload::make('audio')->label('Arquivo'),
+                FileUpload::make('audio')
+                    ->acceptedFileTypes(['audio/mpeg'])
+                    ->getUploadedFileNameForStorageUsing(
+                        fn ($record) => Str::kebab($record->name)
+                    )
+                    ->downloadable()
+                    ->moveFiles()
+                    ->directory('audios')
+                    ->label('Áudio'),
             ]);
     }
 

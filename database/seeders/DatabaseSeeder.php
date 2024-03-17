@@ -11,11 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(DemoSeeder::class);
+        if (! app()->environment('e2e')) {
+            $this->call(DemoSeeder::class);
+        }
 
-        if (! app()->environment('production')) {
-            $this->call(QaSeeder::class);
+        if (app()->environment('local')) {
             $this->call(DevSeeder::class);
+        }
+
+        if (app()->environment('e2e')) {
+            $this->call(EndToEndSeeder::class);
         }
     }
 }

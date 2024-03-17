@@ -50,12 +50,12 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 
 4. Crie a `APP_KEY`
 ```sh
-./vendor/bin/sail artisan key:generate
+./vendor/bin/sail art key:generate
 ```
 
 5. Crie as tabelas com alguns registros do *seeder*
 ```sh
-./vendor/bin/sail artisan migrate:fresh --seed
+./vendor/bin/sail art migrate:fresh --seed
 ```
 
 6. Baixe as dependências javascript
@@ -71,8 +71,8 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 
 8. Crie a documentação de referência que ficará disponível em `localhost/api/reference`
 ```sh
-./vendor/bin/sail artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
-./vendor/bin/sail artisan l5-swagger:generate
+./vendor/bin/sail art vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+./vendor/bin/sail art l5-swagger:generate
 ```
 
 9. Crie o bucket `local` do [MinIO](https://min.io/) em `localhost:8900` usando o login `sail` e `password`
@@ -102,8 +102,8 @@ Outros comandos úteis durante o desenvolvimento:
 - `sail bash`
 - `sail psql`
 - `sail tinker`
-- `sail artisan queue:work`
-- `sail artisan optimize:clear`
+- `sail art queue:work`
+- `sail art optimize:clear`
 - `sail composer i`
 
 ### Linting
@@ -133,4 +133,6 @@ create database hidroponica_testing;
 
 #### QA
 
-É mantido em paralelo os [testes automatizados](http://github.com/nenitf/hidroponiqa) de api e interface web
+É mantido em paralelo os [testes automatizados](http://github.com/nenitf/hidroponiqa) de api e interface web. Para testar:
+- no `.env` deve estar com `APP_ENV` configurado como `e2e`
+- com o projeto ja configurado, executar `sail art migrate:fresh --seed` e `sail art optimize:clear` para resetar o ambiente

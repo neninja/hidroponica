@@ -17,6 +17,7 @@ class AesopSeeder extends Seeder
     {
         // CRÉDITOS: https://etc.usf.edu/lit2go/35/aesops-fables/395/-the-fox-and-the-grapes/
         $this->createText(
+            '51882430-4ac9-3eab-b903-f91b3bb5656e',
             'The Fox and the Grapes',
             [
                 03,
@@ -64,10 +65,10 @@ class AesopSeeder extends Seeder
         );
     }
 
-    public function createText(string $title, array ...$sentences): self
+    public function createText(string $id, string $title, array ...$sentences): self
     {
         Text::factory()
-            ->afterCreating(function (Text $text) use ($sentences) {
+            ->afterCreating(function (Text $text) use ($sentences, $id) {
                 foreach ($sentences as $sentence) {
                     $startAt = $sentence[0];
                     $endAt = $sentence[1];
@@ -85,7 +86,7 @@ class AesopSeeder extends Seeder
                                 ]);
                         })
                         ->create([
-                            'text_id' => $text->id,
+                            'text_id' => $id,
                             'start_at' => $startAt,
                             'end_at' => $endAt,
                             'content' => $content,
@@ -94,6 +95,7 @@ class AesopSeeder extends Seeder
                 }
             })
             ->create([
+                'id' => $id,
                 'name' => $title,
                 'is_active' => true,
                 'language' => LanguageType::English,

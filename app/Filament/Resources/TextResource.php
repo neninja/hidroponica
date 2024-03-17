@@ -36,7 +36,8 @@ class TextResource extends Resource
                 Checkbox::make('is_active')->default(true)->label('Ativo'),
                 Select::make('language')
                     ->required()
-                    ->options(LanguageType::filamentOptions()),
+                    ->options(LanguageType::filamentOptions())
+                    ->label('Idioma'),
                 FileUpload::make('audio')
                     ->acceptedFileTypes(['audio/mpeg'])
                     ->getUploadedFileNameForStorageUsing(

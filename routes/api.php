@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/up', function () {
     return response()->json(['quote' => 'memento mori 💀']);
 });
 

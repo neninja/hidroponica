@@ -1,7 +1,7 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" wire:submit="handleLogin">
-            <x-input wire:model.blur="email" required label="E-mail"></x-input>
+            <x-input wire:model.blur="email" type="email" required label="E-mail"></x-input>
             <x-input wire:model.blur="password" required label="Senha"></x-input>
 
             <div class="text-sm">

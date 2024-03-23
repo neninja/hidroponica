@@ -8,6 +8,6 @@ class Home extends Component
 {
     public function mount()
     {
-        redirect()->route('texts');
+        redirect()->route('texts.index');
     }
 }

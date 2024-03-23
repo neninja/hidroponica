@@ -1,4 +1,4 @@
-<div class="px-5 py-6 shadow sm:px-6" x-data="{id: null, language: null}">
+<div class="px-5 py-6 shadow sm:px-6 text-slate-800" x-data="{id: null, language: null}">
     @if(filled($text->audio))
         <audio controls id="audiofile">
             <source src="{{$text->audioUrl()}}" type="audio/mpeg">

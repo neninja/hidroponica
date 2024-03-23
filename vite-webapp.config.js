@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import autoprefixer from "autoprefixer";
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from "tailwindcss";
 
@@ -16,6 +17,7 @@ export default defineConfig({
                 tailwindcss({
                     config: "./tailwind-webapp.config.js",
                 }),
+                autoprefixer(),
             ],
         },
     },

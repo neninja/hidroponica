@@ -75,7 +75,7 @@ docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:l
 ./vendor/bin/sail art l5-swagger:generate
 ```
 
-9. Crie o bucket `local` do [MinIO](https://min.io/) em `localhost:8900` usando o login `sail` e `password`
+9. Crie o bucket **público** `local` se ainda não foi criado do [MinIO](https://min.io/) em `localhost:8900` usando o login `sail` e `password`
 
 ### Execução
 

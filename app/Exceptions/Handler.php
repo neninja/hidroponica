@@ -2,13 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -29,26 +25,6 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (ThrottleRequestsException $e) {
-            return $this->jsonResponse('errors.rate_limit_exceeded', 429);
-        });
-
-        $this->renderable(function (AppException $e) {
-            return $this->jsonResponse($e->errorCode, $e->getCode());
-        });
-
-        $this->renderable(function (NotFoundHttpException $exception) {
-            return $this->jsonResponse('errors.not_found', 404);
-        });
-
-        $this->renderable(function (HttpExceptionInterface $e) {
-            return $this->jsonResponse('errors.generic', $e->getStatusCode());
-        });
-
-        $this->renderable(function (AuthenticationException $e) {
-            return redirect()->guest('admin/login');
-        });
-
         $this->renderable(function (Throwable $exception, $request) {
             if ($exception instanceof ValidationException) {
                 return $this->convertValidationExceptionToResponse($exception, $request);
@@ -79,7 +55,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    private function jsonResponse(string $errorCode, int $httpStatusCode, array $data = [], string $message = null): JsonResponse
+    private function jsonResponse(string $errorCode, int $httpStatusCode, array $data = [], ?string $message = null): JsonResponse
     {
         $response = [
             'code' => $errorCode,

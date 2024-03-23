@@ -49,7 +49,7 @@ class UserFactory extends Factory
         return $this->state(['role' => UserRole::Operator]);
     }
 
-    public function Student(): static
+    public function student(): static
     {
         return $this->state(['role' => UserRole::Student]);
     }

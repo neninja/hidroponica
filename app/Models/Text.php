@@ -6,6 +6,7 @@ use App\Enums\LanguageType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @mixin IdeHelperText
@@ -38,5 +39,10 @@ class Text extends BaseModel
     public function translatedSentencesGroupByLanguage()
     {
         return $this->translatedSentences()->get()->groupBy('language');
+    }
+
+    public function audioUrl(): string
+    {
+        return str_replace('minio:9000', 'localhost:9000', Storage::url($this->audio));
     }
 }

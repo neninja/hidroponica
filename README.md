@@ -41,6 +41,11 @@ cp .env.example .env
 docker run -v $(pwd):/var/www/html -w /var/www/html laravelsail/php82-composer:latest sh -c "composer config --global && composer install --ignore-platform-reqs"
 ```
 
+```sh
+sudo chown 1000:1000 -R vendor
+sudo chmod 775 -R vendor
+```
+
 3. Suba o ambiente
 ```sh
 ./vendor/bin/sail up -d

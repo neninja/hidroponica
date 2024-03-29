@@ -136,3 +136,4 @@ create database hidroponica_testing;
 É mantido em paralelo os [testes automatizados](http://github.com/nenitf/hidroponiqa) de api e interface web. Para testar:
 - no `.env` deve estar com `APP_ENV` configurado como `e2e`
 - com o projeto ja configurado, executar `sail art migrate:fresh --seed` e `sail art optimize:clear` para resetar o ambiente
+- caso tenha alterado frontend, rode novamente `sail npm run build`

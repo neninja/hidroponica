@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('audio')->nullable();
+            $table->boolean('is_demo')->default(false);
             $table->boolean('is_active')->default(true);
             $table->string('language');
             $table->timestamps();

@@ -34,6 +34,7 @@ class TextResource extends Resource
             ->schema([
                 TextInput::make('name')->required()->label('Título'),
                 Checkbox::make('is_active')->default(true)->label('Ativo'),
+                Checkbox::make('is_demo')->default(true)->label('Demonstrativo'),
                 Select::make('language')
                     ->required()
                     ->options(LanguageType::filamentOptions())
@@ -62,6 +63,7 @@ class TextResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -83,6 +85,7 @@ class TextResource extends Resource
         return [
             'index' => Pages\ListTexts::route('/'),
             'create' => Pages\CreateText::route('/create'),
+            'view' => Pages\ViewText::route('/{record}'),
             'edit' => Pages\EditText::route('/{record}/edit'),
         ];
     }

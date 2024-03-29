@@ -5,7 +5,8 @@
         "dev:backoffice": "vite",
         "dev:webapp": "vite --config vite-webapp.config.js",
         "build:backoffice": "vite build",
-        "build:webapp": "vite build --config vite-webapp.config.js"
+        "build:webapp": "vite build --config vite-webapp.config.js",
+        "build": "npm run build:backoffice && npm run build:webapp"
     },
     "devDependencies": {
         "@alpinejs/focus": "^3.13.3",

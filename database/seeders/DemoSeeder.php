@@ -28,6 +28,7 @@ class DemoSeeder extends Seeder
         if (! User::find(self::DEMO_OPERATOR_ID)) {
             User::factory()->create([
                 'id' => self::DEMO_OPERATOR_ID,
+                'name' => 'Operador Demo',
                 'email' => 'demo.operador@hidroponi.ca',
                 'role' => UserRole::DemoOperator,
                 'password' => '123',
@@ -37,6 +38,7 @@ class DemoSeeder extends Seeder
         if (! User::find(self::DEMO_STUDENT_ID)) {
             User::factory()->create([
                 'id' => self::DEMO_STUDENT_ID,
+                'name' => 'Aluno Demo',
                 'email' => 'demo.aluno@hidroponi.ca',
                 'role' => UserRole::DemoStudent,
                 'password' => '123',

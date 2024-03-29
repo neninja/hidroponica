@@ -11,9 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (! app()->environment('e2e')) {
-            $this->call(DemoSeeder::class);
-        }
+        $this->call(DemoSeeder::class);
 
         if (app()->environment('local')) {
             $this->call(DevSeeder::class);

@@ -64,4 +64,19 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     {
         return in_array($permission, $this->role?->permissions());
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::Admin;
+    }
+
+    public function isOperator(): bool
+    {
+        return $this->role === UserRole::Operator;
+    }
+
+    public function isDemo(): bool
+    {
+        return $this->role === UserRole::DemoOperator || $this->role === UserRole::DemoStudent;
+    }
 }

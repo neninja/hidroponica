@@ -9,8 +9,7 @@
         @foreach ($text->sentences as $i => $sentence)
             @if($sentence->new_paragraph && $i > 0)
                 </p>
-            @endif
-            @if($sentence->new_paragraph)
+            @elseif($sentence->new_paragraph)
                 <p class="mt-2">
             @endif
             <span

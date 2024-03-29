@@ -62,12 +62,82 @@ class AesopSeeder extends Seeder
                 'É fácil desprezar o que você não consegue.',
                 true,
             ],
+        )->update(['is_demo' => true]);
+
+        // CRÉDITOS
+        $this->createText(
+            'cda4f288-b5a3-43cb-8d9c-fb68a55c935a',
+            'The Wolf and the Lamb',
+            [
+                30,
+                39.5,
+                'A Wolf came upon a Lamb straying from the flock, and felt some compunction about taking the life of so helpless a creature without some plausible excuse;',
+                'Um lobo encontrou um cordeiro se afastando do rebanho e sentiu algum remorso por tirar a vida de uma criatura tão indefesa sem uma desculpa plausível;',
+            ],
+            [
+                39.8,
+                43,
+                'so he cast about for a grievance and said at last,',
+                'então ele procurou uma queixa e disse finalmente,',
+            ],
+            [
+                43.1,
+                46,
+                '"Last year, sirrah, you grossly insulted me."',
+                '"Ano passado, senhor, você me insultou grosseiramente."',
+            ],
+            [
+                47.5,
+                51,
+                '"That is impossible, sir," bleated the Lamb, "for I wasn\'t born then."',
+                '"Isso é impossível, senhor", baliu o Cordeiro, "pois eu não nasci então."',
+            ],
+            [
+                52,
+                56,
+                '"Well," retorted the Wolf, "you feed in my pastures."',
+                '"Bem", retorquiu o Lobo, "você se alimenta em meus pastos."',
+            ],
+            [
+                56.4,
+                62,
+                '"That cannot be," replied the Lamb, "for I have never yet tasted grass."',
+                '"Isso não pode ser", respondeu o Cordeiro, "pois nunca provei grama."',
+            ],
+            [
+                63,
+                66,
+                '"You drink from my spring, then," continued the Wolf.',
+                '"Você bebe da minha fonte, então," continuou o Lobo.',
+                true,
+            ],
+            [
+                66.5,
+                72,
+                '"Indeed, sir," said the poor Lamb, "I have never yet drunk anything but my mother\'s milk."',
+                '"Na verdade, senhor", disse o pobre Cordeiro, "nunca bebi nada além do leite de minha mãe."',
+                true,
+            ],
+            [
+                73,
+                77,
+                '"Well, anyhow," said the Wolf, "I\'m not going without my dinner":',
+                '"Bem, de qualquer forma", disse o Lobo, "não vou embora sem o meu jantar":',
+                true,
+            ],
+            [
+                77.5,
+                82,
+                'and he sprang upon the Lamb and devoured it without more ado.',
+                'e ele saltou sobre o Cordeiro e o devorou sem mais delongas.',
+                true,
+            ],
         );
     }
 
-    public function createText(string $id, string $title, array ...$sentences): self
+    public function createText(string $id, string $title, array ...$sentences): Text
     {
-        Text::factory()
+        return Text::factory()
             ->afterCreating(function (Text $text) use ($sentences, $id) {
                 foreach ($sentences as $sentence) {
                     $startAt = $sentence[0];
@@ -100,7 +170,5 @@ class AesopSeeder extends Seeder
                 'is_active' => true,
                 'language' => LanguageType::English,
             ]);
-
-        return $this;
     }
 }

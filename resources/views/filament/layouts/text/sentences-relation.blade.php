@@ -1,6 +1,9 @@
 <div>
 @php
 $sentences = $this->getRelationship()->get();
+
+$action = \Illuminate\Support\Facades\Auth::user()->can('update', $this->ownerRecord)
+    ? 'edit' : 'view';
 @endphp
     <x-filament-actions::modals />
     <div
@@ -16,30 +19,22 @@ $sentences = $this->getRelationship()->get();
                 <div class="flex flex-col gap-4">
                     <div>
                         <p>
-                        @foreach ($this->ownerRecord->sentences as $sentence)
-                            @if($sentence->new_paragraph)
-                            </p>
-                            <p>
-                                <span
-                                    class="cursor-pointer"
-                                    wire:loading.attr="disabled"
-                                    :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
-                                    wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                                    @mouseenter="id = '{{$sentence->id}}'"
-                                >
-                                    {{$sentence->content}}
-                                </span>
-                            @else
+                        @foreach ($this->ownerRecord->sentences as $i => $sentence)
+                            @if($sentence->new_paragraph && $i > 0)
+                                </p>
+                            @elseif($sentence->new_paragraph)
+                                <p>
                             @endif
-                                <span
-                                    class="cursor-pointer"
-                                    wire:loading.attr="disabled"
-                                    :class="{ 'bg-red-200': id == '{{$sentence->id}}'}"
-                                    wire:click="mountTableAction('edit', '{{$sentence->id}}')"
-                                    @mouseenter="id = '{{$sentence->id}}'"
-                                >
-                                    {{$sentence->content}}
-                                </span>
+                            <span
+                                class="cursor-pointer"
+                                wire:loading.attr="disabled"
+                                :class="{ 'bg-red-200 dark:bg-blue-800': id == '{{$sentence->id}}'}"
+                                wire:click="mountTableAction('{{$action}}', '{{$sentence->id}}')"
+                                @mouseenter="id = '{{$sentence->id}}'"
+                                @mouseleave="id=null"
+                            >
+                                {{$sentence->content}}
+                            </span>
                         @endforeach
                         </p>
                     </div>
@@ -58,29 +53,21 @@ $sentences = $this->getRelationship()->get();
                     </x-slot>
                     <p>
                     @foreach ($translatedSentences as $translatedSentence)
-                        @if($translatedSentence->sentence->new_paragraph)
-                        </p>
-                        <p>
-                            <span
-                                class="cursor-pointer"
-                                wire:loading.attr="disabled"
-                                :class="{ 'bg-red-200': id == '{{$translatedSentence->sentence->id}}'}"
-                                wire:click="mountTableAction('edit', '{{$translatedSentence->sentence->id}}')"
-                                @mouseenter="id = '{{$translatedSentence->sentence->id}}'"
-                            >
-                                {{$translatedSentence->content}}
-                            </span>
-                        @else
+                        @if($translatedSentence->sentence->new_paragraph && $i > 0)
+                            </p>
+                        @elseif($translatedSentence->sentence->new_paragraph)
+                            <p>
                         @endif
-                            <span
-                                class="cursor-pointer"
-                                wire:loading.attr="disabled"
-                                :class="{ 'bg-red-200': id == '{{$translatedSentence->sentence->id}}'}"
-                                wire:click="mountTableAction('edit', '{{$translatedSentence->sentence->id}}')"
-                                @mouseenter="id = '{{$translatedSentence->sentence->id}}'"
-                            >
-                                {{$translatedSentence->content}}
-                            </span>
+                        <span
+                            class="cursor-pointer"
+                            wire:loading.attr="disabled"
+                            :class="{ 'bg-red-200 dark:bg-blue-800': id == '{{$translatedSentence->sentence->id}}'}"
+                            wire:click="mountTableAction('{{$action}}', '{{$translatedSentence->sentence->id}}')"
+                            @mouseenter="id = '{{$translatedSentence->sentence->id}}'"
+                            @mouseleave="id=null"
+                        >
+                            {{$translatedSentence->content}}
+                        </span>
                     @endforeach
                     </p>
                 </x-filament::section>

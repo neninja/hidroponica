@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\LanguageType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -19,12 +20,22 @@ class Text extends BaseModel
         'name',
         'audio',
         'language',
+        'is_demo',
         'is_active',
     ];
 
     protected $casts = [
         'language' => LanguageType::class,
     ];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('demo', function (Builder $builder) {
+            if (auth()->user()?->isDemo()) {
+                $builder->where('is_demo', true);
+            }
+        });
+    }
 
     public function sentences(): HasMany
     {

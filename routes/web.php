@@ -29,9 +29,10 @@ Route::get('/pricing', function () {
 Route::prefix('/app')->group(function () {
     Route::middleware('guest:web')->group(function () {
         Route::get('/login', Livewire\Login::class)->name('login');
+        Route::get('/demo', Livewire\DemoImpersonate::class)->name('demo');
     });
 
-    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', Livewire\Home::class)->name('home');
         Route::get('/logout', Livewire\Logout::class)->name('logout');
 

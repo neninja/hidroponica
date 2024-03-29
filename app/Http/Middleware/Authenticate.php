@@ -4,13 +4,29 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\UnauthorizedException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Str;
 
 class Authenticate extends Middleware
 {
     // Override handle method
     public function handle($request, \Closure $next, ...$guards)
     {
-        $this->authenticate($request, $guards);
+        try {
+            $this->authenticate($request, $guards);
+        } catch (UnauthorizedException $e) {
+            if ($request->expectsJson()) {
+                throw $e;
+            }
+
+            if (Str::contains($request->url(), '/app')) {
+                return redirect()->route('login');
+            }
+
+            // avoid loop
+            if (! Str::contains($request->url(), 'admin/login')) {
+                return redirect()->route('filament.admin.auth.login');
+            }
+        }
 
         return $next($request);
     }
